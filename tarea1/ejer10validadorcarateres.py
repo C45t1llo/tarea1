@@ -1,4 +1,5 @@
 class AnalizadorString:
+
     def __init__(self):
         self.texto_mas_largo = ""
 
@@ -6,26 +7,42 @@ class AnalizadorString:
         return letra.lower() in "aeiou"
 
     def contar_por_tipo(self, texto):
-        conteo = {
-            "vocales": 0,
-            "consonantes": 0,
-            "digitos": 0
-        }
+        vocales = 0
+        consonantes = 0
+        digitos = 0
 
         for letra in texto:
-            if self.solo_vocales(letra):
-                conteo["vocales"] += 1
-            elif letra.isdigit():
-                conteo["digitos"] += 1
-            else:
-                conteo["consonantes"] += 1
+
+            if letra.isdigit():
+                digitos += 1
+
+            elif self.solo_vocales(letra):
+                vocales += 1
+
+            elif letra.isalpha():
+                consonantes += 1
 
         if len(texto) > len(self.texto_mas_largo):
             self.texto_mas_largo = texto
 
-        return conteo
+        return {
+            "vocales": vocales,
+            "consonantes": consonantes,
+            "digitos": digitos
+        }
 
 
-astr = AnalizadorString()
+analizador = AnalizadorString()
 
-print(astr.contar_por_tipo("Te amo Emanuella regresa 22"))
+print(analizador.contar_por_tipo(" sere el mejor ingeniero "))
+print(analizador.contar_por_tipo("Emanuella te amo"))
+print(analizador.contar_por_tipo("Programador x "))
+
+print("Texto más largo:", analizador.texto_mas_largo)
+
+
+        
+        
+
+
+        
